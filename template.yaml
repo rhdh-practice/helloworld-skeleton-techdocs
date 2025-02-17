@@ -71,7 +71,7 @@ spec:
       name: Push to GitHub 
       action: publish:github
       input:
-        repoUrl: ${{ parameters.git_host_url }}?owner=${{ parameters.git_owner_name }}&repo=${{ parameters.git-repo_name }}
+        repoUrl: ${{ parameters.git_host_url }}?owner=${{ parameters.git_owner_name }}&repo=${{ parameters.git_repo_name }}
         repoVisibility: public
         sourcePath: ./tenant
         defaultBranch: develop
