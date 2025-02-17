@@ -12,7 +12,7 @@ metadata:
     - url: https://${{ values.app_name }}-${{ values.app_name }}.apps.rosa.sb961-hcp.611c.p3.openshiftapps.com
       title: Application Web Site
       icon: dashboard
-    - url: https://${{ parameters.git_host_url }}/${{ parameters.git_owner_name }}/${{ parameters.git_repo_name }} 
+    - url: https://${{ values.git_host_url }}/${{ values.git_owner_name }}/${{ values.git_repo_name }} 
       title: App Repository
       icon: github
   annotations:
