@@ -4,7 +4,7 @@ metadata:
   name: ${{ values.app_name }}
   namespace: openshift-gitops
 spec:
-  project: ${{ values.app_name }}
+  project: default 
   source:
     repoURL: https://${{ values.git_host_url }}/${{ values.git_owner_name }}/${{ values.app_name }}.git
     targetRevision: develop
