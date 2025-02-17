@@ -1,0 +1,231 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: helloworld
+  title: Hello world app
+  description: シンプルなHelloWorldアプリをデプロイするためのテンプレート 
+  tags:
+    - recommended
+spec:
+  owner: user:default/skitamura7446
+  type: website
+
+  parameters:
+    - title: 作成するComponentの情報
+      required:
+        - app_name
+        - owner
+      properties:
+        app_name:
+          title: アプリケーション名
+          description: 作成するアプリ名を指定してください。
+          type: string
+          default: "helloworld"
+        owner:
+          title: オーナー
+          type: string
+          description: 作成するComponentのオーナーを選択してください。
+          ui:field: OwnerPicker
+          ui:options:
+            catalogFilter:
+              kind:
+                - Group
+                - User
+
+    - title: GitHubリポジトリの情報
+      required:
+        - git_repo_name
+        - git_host_url
+        - git_owner_name
+      properties:
+        git_repo_name:
+          title: GitHubリポジトリ名
+          description: 生成するGitHubリポジトリ名を入力してください。
+          type: string
+          default: hellowrold
+        git_host_url:
+          title: GitHub URL
+          description: GitHubリポジトリのURLを入力してください。
+          type: string
+          default: github.com
+        git_owner_name:
+          title: GitHub Organization名
+          description: GitHubリポジトリを生成するGitHub Organization名を入力してください。
+          type: string
+          default: rhdh-practice
+        #system:
+        #  title: System
+        #  type: string
+        #  ui:field: EntityPicker
+        #  ui:options:
+        #    catalogFilter:
+        #      kind:
+        #        - System
+        #cluster_url:
+        #  title: Cluster URL
+        #  type: string
+        #  default: "apps.rosa.rosa-hcp-1544.kfnj.p3.openshiftapps.com"
+
+    #- title: Provide Image Registry Information
+    #  required:
+    #    - registry
+    #    - registry_url
+    #  properties:
+    #    registry:
+    #      title: Image Registry
+    #      type: string
+    #      enum:
+    #        - openshift
+    #        - quay
+    #      enumNames:
+    #        - OpenShift Internal Registry
+    #        - Quay
+    #  dependencies:
+    #    registry:
+    #      oneOf:
+    #        - properties:
+    #            registry:
+    #              enum:
+    #                - openshift
+    #            registry_url:
+    #              title: Image Registry Host URL
+    #              type: string
+    #              default: "image-registry.openshift-image-registry.svc:5000"
+    #              description: Host for storing image URL
+    #        - properties:
+    #            registry:
+    #              enum:
+    #                - quay
+    #            registry_url:
+    #              title: Image Registry Host URL
+    #              type: string
+    #              default: "quay-registry-quay-quay.apps.rosa.rosa-hcp-1544.kfnj.p3.openshiftapps.com"
+    #              description: Host for storing image URL
+
+    #- title: Provide information about the git to used
+    #  required:
+    #    - git
+    #    - git_host_url
+    #    - git_owner_name
+    #  properties:
+    #    git:
+    #      title: Git of Destination
+    #      type: string
+    #      description: This action will store the application source code on the selected Git server
+    #      enum:
+    #        - github
+    #        - gitlab
+    #      enumNames:
+    #        - GitHub
+    #        - GitLab
+    #  dependencies:
+    #    git:
+    #      oneOf:
+    #        - properties:
+    #            git:
+    #              enum:
+    #                - github
+    #            git_host_url:
+    #              title: Git Host URL
+    #              type: string
+    #              default: github.com
+    #              description: Specify the GitHub or GitLab host URL(e.g., github.com)
+    #            git_owner_name:
+    #              title: GitHub Organization Name or User Name
+    #              type: string
+    #              description: Specify the GitHub Organization or User to register the repository
+    #              default: rhdh-skitamura-org
+    #            ci_tool:
+    #              title: CI Tool
+    #              description: Tool to run CI pipelines for applications
+    #              type: string
+    #              enum:
+    #                - tekton
+    #                - github-actions
+    #              enumNames:
+    #                - Tekton
+    #                - GitHub Actions
+    #        - properties:
+    #            git:
+    #              enum:
+    #                - gitlab
+    #            git_host_url:
+    #              title: Git Host URL
+    #              type: string
+    #              default: gitlab.com
+    #              description: Specify the GitLab or GitLab host URL(e.g., gitlab.com)
+    #            git_owner_name:
+    #              title: GitLab Group Name or User Name
+    #              type: string
+    #              description: Specify the GitLab Group or User to register the repository
+    #              default: rhdh-skitamura-group
+    #            ci_tool:
+    #              title: CI Tool
+    #              description: Tool to run CI pipelines for applications
+    #              type: string
+    #              enum:
+    #                - tekton
+    #                - gitlab-ci
+    #              enumNames:
+    #                - Tekton
+    #                - GitLab CI
+  steps:
+    - id: fetch
+      name: Fetch skeleton 
+      action: fetch:template
+      input:
+        url: ./manifest-skeleton
+        values:
+          #git: ${{ parameters.git }}
+          app_name: ${{ parameters.app_name }}
+          owner: ${{ parameters.owner }}
+          git_repo_name: ${{ parameters.repo_name }}
+          git_host_url: ${{ parameters.git_host_url }}
+          git_owner_name: ${{ parameters.git_owner_name }}
+          #system: ${{ parameters.system }}
+          #description: ${{ parameters.description }}
+          #cluster_url: ${{ parameters.cluster_url }}
+          #registry: ${{ parameters.registry }}
+          #registry_url: ${{ parameters.registry_url }}
+          #quay_org: skitamura-quay-org
+          #ci_tool: ${{ parameters.ci_tool }}
+        targetPath: ./tenant
+
+    #- id: timestamping
+    #  name: Adds the backstage.io/createdAt annotation
+    #  action: catalog:timestamping
+    #  input:
+    #    entityFilePath: "./tenant-app/catalog-info.yaml"
+    #    writeToFile: "./tenant-app/catalog-info.yaml"
+
+    - id: publish
+      name: Push to GitHub 
+      action: publish:github
+      input:
+        repoUrl: ${{ parameters.git_host_url }}?owner=${{ parameters.git_owner_name }}&repo=${{ parameters.git-repo_name }}
+        repoVisibility: public
+        sourcePath: ./tenant
+        defaultBranch: develop
+        protectDefaultBranch: false
+
+    - id: argocd
+      name: Deploy with ArgoCD
+      action: argocd:create-resources
+      input:
+        appName: ${{ parameters.app_name }}
+        argoInstance: main
+        namespace: openshift-gitops
+        repoUrl: https://${{ parameters.git_host_url }}/${{ parameters.git_owner_name }}/${{ parameters.git_repo_name }}.git
+        path: 'manifests/'
+
+    - id: register-to-github
+      name: Register into Developer Hub 
+      action: catalog:register
+      input:
+        repoContentsUrl: ${{ steps['publish'].output.repoContentsUrl }}
+        catalogInfoPath: "/catalog-info.yaml"
+
+  output:
+    links:
+      - title: Gitリポジトリ
+        url: ${{ steps['publish'].output.remoteUrl }}
