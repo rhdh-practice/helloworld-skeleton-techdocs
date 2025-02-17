@@ -81,7 +81,7 @@ spec:
       name: Deploy with ArgoCD
       action: argocd:create-resources
       input:
-        appName: ${{ parameters.app_name }}
+        appName: ${{ parameters.app_name }}-init
         argoInstance: main
         namespace: openshift-gitops
         repoUrl: https://${{ parameters.git_host_url }}/${{ parameters.git_owner_name }}/${{ parameters.git_repo_name }}.git
