@@ -87,8 +87,8 @@ spec:
         repoUrl: https://${{ parameters.git_host_url }}/${{ parameters.git_owner_name }}/${{ parameters.git_repo_name }}.git
         path: 'argocd/'
 
-    - id: register-to-github
-      name: Register into Developer Hub 
+    - id: register
+      name: Register Catalog into Developer Hub 
       action: catalog:register
       input:
         repoContentsUrl: ${{ steps['publish'].output.repoContentsUrl }}
@@ -96,5 +96,9 @@ spec:
 
   output:
     links:
-      - title: Gitリポジトリ
+      - title: Componentを開く
+        icon: catalog
+        entityRef: ${{ steps['register'].output.entityRef }}
+      - title: Gitリポジトリを開く
         url: ${{ steps['publish'].output.remoteUrl }}
+        icon: github
