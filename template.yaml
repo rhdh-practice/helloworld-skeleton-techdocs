@@ -42,7 +42,7 @@ spec:
           title: GitHubリポジトリ名
           description: 生成するGitHubリポジトリ名を入力してください。
           type: string
-          default: hellowrold
+          default: helloworld
         git_host_url:
           title: GitHub URL
           description: GitHubリポジトリのURLを入力してください。
