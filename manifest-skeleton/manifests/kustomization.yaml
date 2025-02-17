@@ -5,6 +5,7 @@ commonLabels:
   backstage.io/kubernetes-id: ${{ values.app_name }}
 
 resources:
+  - project.yaml
   - deployment.yaml
   - service.yaml
   - route.yaml
