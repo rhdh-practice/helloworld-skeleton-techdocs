@@ -62,7 +62,7 @@ spec:
         values:
           app_name: ${{ parameters.app_name }}
           owner: ${{ parameters.owner }}
-          git_repo_name: ${{ parameters.repo_name }}
+          git_repo_name: ${{ parameters.git_repo_name }}
           git_host_url: ${{ parameters.git_host_url }}
           git_owner_name: ${{ parameters.git_owner_name }}
         targetPath: ./tenant
