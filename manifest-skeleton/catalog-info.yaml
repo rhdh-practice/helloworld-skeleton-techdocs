@@ -12,7 +12,7 @@ metadata:
   annotations:
     backstage.io/kubernetes-label-selector: 'app=${{ values.app_name }}'
     backstage.io/kubernetes-namespace: ${{ values.app_name }}
-    argocd/app-selector: argocd.argoproj.io/instance=${{ values.app_name }}-init
+    argocd/app-selector: app.kubernetes.io/instance=${{ values.app_name }}-init
 spec:
   type: website
   owner: ${{ values.owner }}
