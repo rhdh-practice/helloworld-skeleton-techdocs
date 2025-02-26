@@ -5,7 +5,9 @@ on:
     branches:
       - develop
     paths:
-      - 'techdocs/**'
+    paths:
+      - 'docs/**'
+      - 'mkdocs.yaml'
   workflow_dispatch:
 
 jobs:
