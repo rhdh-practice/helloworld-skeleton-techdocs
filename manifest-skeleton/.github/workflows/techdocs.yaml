@@ -17,7 +17,7 @@ jobs:
     env:
       AWS_ACCOUNT_ID: ${{ "${{" }} secrets.AWS_ACCOUNT_ID }}
       TECHDOCS_S3_BUCKET_NAME: ${{ "${{" }} secrets.TECHDOCS_BUCKET_NAME }}
-      AWS_REGION: ${{ "${{" }} secrets.TECHDOCS_AWS_REGION }}
+      AWS_REGION: ${{ "${{" }} secrets.AWS_REGION }}
       ENTITY_NAMESPACE: 'default'
       ENTITY_KIND: 'Component'
       ENTITY_NAME: ${{ values.app_name }}
