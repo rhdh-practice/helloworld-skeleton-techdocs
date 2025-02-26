@@ -41,11 +41,11 @@ jobs:
       - name: Install techdocs-cli
         run: sudo npm install -g @techdocs/cli
 
-      #- name: Link morgan
-      #  run: sudo npm link morgan
+      - name: Link morgan
+        run: sudo npm link morgan
 
-      #- name: Link node-forge
-      #  run: sudo npm link node-forge
+      - name: Link node-forge
+        run: sudo npm link node-forge
 
       - name: Install mkdocs and mkdocs plugins
         run: python -m pip install mkdocs-techdocs-core==1.*
