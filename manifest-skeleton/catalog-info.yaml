@@ -14,6 +14,7 @@ metadata:
     backstage.io/kubernetes-namespace: ${{ values.app_name }}
     argocd/app-selector: app.kubernetes.io/instance=${{ values.app_name }}-init
     backstage.io/techdocs-ref: url:https://${{ values.git_host_url }}/${{ values.git_owner_name }}/${{ values.git_repo_name }}
+    github.com/project-slug: ${{ values.git_owner_name }}/${{ values.git_repo_name }}
 spec:
   type: website
   owner: ${{ values.owner }}
