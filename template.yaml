@@ -1,8 +1,8 @@
 apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
-  name: helloworld
-  title: Hello world app
+  name: helloworld-techdocs
+  title: Hello world app with TechDocs
   description: シンプルなHelloWorldアプリをデプロイするためのテンプレート 
   tags:
     - recommended
